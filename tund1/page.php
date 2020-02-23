@@ -48,9 +48,10 @@
 		}
 	}
 	$photoCount = count($photoList);
+	if ($photoCount > 0) {
     $photoNum = mt_rand(0, $photoCount - 1);
-    $randomImageHTML = '<img src="' .$picsDir .$photoList[$photoNum] .'" alt="juhuslik pilt Haapsalust">' ."\n";
-	
+    $randomImageHTML = '<img src="' .$picsDir .$photoList[$photoNum] .'" alt="juhuslik pilt Haapsalust">' ."\n";	
+	}
 ?>
 
 <!DOCTYPE html>
@@ -65,8 +66,13 @@
 	<?php
 		echo $timeHTML;
 		echo $partOfDayHTML;
-		echo $semesterProgressHTML;
-		echo $randomImageHTML;
+		if ($fromSemesterStart->format ("%r%a") < $semesterDuration->format ("%r%a"))
+			echo $semesterProgressHTML;
+		if ($photoCount > 0) {
+			echo $randomImageHTML;
+		} else {
+			echo "Pilte mida kuvada ei ole";
+		}
 	?>
 </body>
 </html>
